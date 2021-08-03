@@ -24,7 +24,7 @@ function flushCallbacks() {
   // 比如 $nextTick的回调函数里还有$nextTick
   // 后者的应该放到下一轮的nextTick 中执行
   // 所以拷贝一份当前的，遍历执行完当前的即可，避免无休止的执行下去
-  const copies = callbcks.slice(0)
+  const copies = callbacks.slice(0)
   callbacks.length = 0
   for (let i = 0; i < copies.length; i++) {
     copies[i]()

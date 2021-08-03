@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app">
+    <form>
+      <input type="text" v-model="number">
+      <button type="button" v-click="increment">add one</button>
+    </form>
+    <h3 v-bind="number"></h3>
+    <form>
+      <input type="text" v-model="number2">
+      <button type="button" v-click="increment2">add one</button>
+    </form>
+    <h3 v-bind="number2"></h3>
+  </div>
+  <script type="module" src="./index.js"></script>
+</body>
+
+</html>
