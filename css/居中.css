@@ -1,0 +1,15 @@
+.horizontally {
+  text-align:center;
+  display: inline-block;
+  margin: 0 auto;
+  display: flex;
+  position: absolute;
+}
+
+.verticle {
+  line-height: 1;
+  vertical-align: middle;
+  display: flex;
+  display: table-cell;
+  position: absolute;
+}

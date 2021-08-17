@@ -1,31 +1,31 @@
-class MyPromise {
-  constructor (executor) {
-    this.state = 'pedding'
-    this.value = ''
-    this.reason = ''
-
-    let resolve = (value) =>  {
-      this.state = 'resolve'
+function MyPromise(callback) {
+  this.status = "pending"
+  this.value = null
+  this.successCallback = []
+  const resolve = (value) => {
+    if (this.status === "pending") {
+      this.status = "success"
       this.value = value
+      this.successCallback.map(item => item(value))
     }
-    let reject = (reason) => {
-      this.state = 'reject'
-      this.reason = reason
-    }
-    pedding(resolve, reject)
   }
-  then (onFullfill, onReject) {
-    if (this.state === 'resolve') {
-      onFullfill(this.value)
+  const reject = value => {
+    if (this.status === "pending") {
+      this.status === "reject"
     }
-    if (this.state === 'reject') {
-      onReject(this.reason)
-    }
+  }
+  callback(resolve, reject)
+}
+
+MyPromise.prototype.then = function (callback) {
+  if (this.status === "success") {
+    callback(this.value)
+  } else if (this.status === "pending") {
+    this.successCallback.push(callback)
   }
 }
 
-
-var p = new Promise((resolve, reject) => {
+var p = new MyPromise((resolve, reject) => {
   resolve(1)
 })
 

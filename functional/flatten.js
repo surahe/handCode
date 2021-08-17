@@ -2,7 +2,7 @@
 // flat默认只会 “拉平” 一层，如果想要 “拉平” 多层的嵌套数组，需要给flat传递一个整数，表示想要拉平的层数。
 
 function flattenDeep(arr, deepLength){
-  return arr.flat(deelLength)
+  return arr.flat(deepLength)
 }
 
 function flatten1(arr) {

@@ -1,23 +1,33 @@
-// 设置cookie
-function setCookie(name, value) {
-  var Days = 30;
-  var exp = new Date();
-  exp.setTime(exp.getTime() + Days * 24 * 60 * 60 * 1000);
-  document.cookie = name + "=" + escape(value) + ";expires=" + exp.toGMTString();
+// 添加cookie
+function setCookie(key, value, maxAge) {
+  // 在设置cookie前进行编码操作。
+  value = encodeURIComponent(value);
+  if (maxAge) {
+    document.cookie = `${key}=${value};max-age=${maxAge};`;
+  } else {
+    document.cookie = `${key}=${value};`;
+  }
 }
 
-// 读取cookie
-function getCookie(name) {
-  var arr, reg = new RegExp("(^| )" + name + "=([^;]*)(;|$)");
-  return (arr = document.cookie.match(reg)) ? unescape(arr[2]) : null;
+// 获取cookie
+function getCookie(key) {
+  var arr = document.cookie.split(';'); // ['name=董书华','age=20',...]
+  if (arr.length > 0) {
+    for (let i = 0; i < arr.length; i++) {
+      const a = arr[i].split('=');
+      var index = a.findIndex(function (v) {
+        return v.trim() == key;
+      });
+      if (index != -1) {
+        return decodeURIComponent(a[1]);
+      }
+    }
+  }
+  return undefined;
 }
 
 // 删除cookie
-function delCookie(name) {
-  var exp = new Date();
-  exp.setTime(exp.getTime() - 1);
-  var cval = getCookie(name);
-  if (cval != null)
-    document.cookie = name + "=" + cval + ";expires=" + exp.toGMTString();
+function removeCookie(key) {
+  var value = getCookie(key);
+  setCookie(key, value, -60000);
 }
-

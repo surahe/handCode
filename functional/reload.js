@@ -1,14 +1,11 @@
 function addMethod(object, name, fn) {
   var old = object[name]
-  if (old) {
-    if (fn.length === arguments.length) {
-      return fn.apply(this, arguments)
-    } else {
-      return old.apply(this, arguments)
-    }
-  } else {
-    object[name] = fn
-  }
+  object[name] = function () {
+    if (fn.length == arguments.length)
+      return fn.apply(this, arguments);
+    else if (typeof old == 'function')
+      return old.apply(this, arguments);
+  };
 }
 
 function Users() {

@@ -2,15 +2,15 @@ function unique(array) {
   // res用来存储结果
   var res = [];
   for (var i = 0, arrayLen = array.length; i < arrayLen; i++) {
-      for (var j = 0, resLen = res.length; j < resLen; j++ ) {
-          if (array[i] === res[j]) {
-              break;
-          }
+    for (var j = 0, resLen = res.length; j < resLen; j++) {
+      if (array[i] === res[j]) {
+        break;
       }
-      // 如果array[i]是唯一的，那么执行完循环，j等于resLen
-      if (j === resLen) {
-          res.push(array[i])
-      }
+    }
+    // 如果array[i]是唯一的，那么执行完循环，j等于resLen
+    if (j === resLen) {
+      res.push(array[i])
+    }
   }
   return res;
 }
@@ -19,51 +19,51 @@ function unique(array) {
 function unique2(array) {
   var res = [];
   for (var i = 0, len = array.length; i < len; i++) {
-      var current = array[i];
-      if (res.indexOf(current) === -1) {
-          res.push(current)
-      }
+    var current = array[i];
+    if (res.indexOf(current) === -1) {
+      res.push(current)
+    }
   }
   return res;
 }
 
 // 试想我们先将要去重的数组使用 sort 方法排序后，相同的值就会被排在一起，然后我们就可以只判断当前元素与上一个元素是否相同，相同就说明重复，不相同就添加进 res
 function unique3(array) {
-    var res = [];
-    var sortedArray = array.concat().sort();
-    var seen;
-    for (var i = 0, len = sortedArray.length; i < len; i++) {
-        // 如果是第一个元素或者相邻的元素不相同
-        if (!i || seen !== sortedArray[i]) {
-            res.push(sortedArray[i])
-        }
-        seen = sortedArray[i];
+  var res = [];
+  var sortedArray = array.concat().sort();
+  var seen;
+  for (var i = 0, len = sortedArray.length; i < len; i++) {
+    // 如果是第一个元素或者相邻的元素不相同
+    if (!i || seen !== sortedArray[i]) {
+      res.push(sortedArray[i])
     }
-    return res;
+    seen = sortedArray[i];
+  }
+  return res;
 }
 
 // filter + indexOf
 function unique4(array) {
-    var res = array.filter(function(item, index, array){
-        return array.indexOf(item) === index;
-    })
-    return res;
+  var res = array.filter(function (item, index, array) {
+    return array.indexOf(item) === index;
+  })
+  return res;
 }
 
 // filter + sort
 function unique5(array) {
-    return array.concat().sort().filter(function(item, index, array){
-        return !index || item !== array[index - 1]
-    })
+  return array.concat().sort().filter(function (item, index, array) {
+    return !index || item !== array[index - 1]
+  })
 }
 
 // Set
 function unique6(array) {
-    return [...new Set(array)];
+  return [...new Set(array)];
 }
 
 // Map
-function unique7 (arr) {
+function unique7(arr) {
   const seen = new Map()
   return arr.filter((a) => !seen.has(a) && seen.set(a, 1))
 }
@@ -83,26 +83,26 @@ function unique8(array, isSorted, iteratee) {
   var seen = []
 
   for (var i = 0, len = array.length; i < len; i++) {
-      var value = array[i]
-      var computed = iteratee ? iteratee(value, i, array) : value
-      if (isSorted) {
-          if (!i || seen !== computed) {
-              res.push(value)
-          }
-          seen = computed
+    var value = array[i]
+    var computed = iteratee ? iteratee(value, i, array) : value
+    if (isSorted) {
+      if (!i || seen !== computed) {
+        res.push(value)
       }
-      else if (iteratee) {
-          if (seen.indexOf(computed) === -1) {
-              seen.push(computed)
-              res.push(value)
-          }
+      seen = computed
+    }
+    else if (iteratee) {
+      if (seen.indexOf(computed) === -1) {
+        seen.push(computed)
+        res.push(value)
       }
-      else if (res.indexOf(value) === -1) {
-          res.push(value)
-      }        
+    }
+    else if (res.indexOf(value) === -1) {
+      res.push(value)
+    }
   }
   return res
 }
-unique(array, false, function(item){
+unique(array, false, function (item) {
   return typeof item == 'string' ? item.toLowerCase() : item
 })
