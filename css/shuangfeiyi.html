@@ -11,25 +11,26 @@
       height: 150px;
     }
 
-    .middle {
+    .container > div {
       float: left;
+    }
+
+    .middle {
       width: 100%;
       background: yellow;
     }
 
     .middle .inner {
-      margin-left: 300px;
+      margin: 0 300px;
     }
 
     .left {
-      float: left;
       margin-left: -100%;
       width: 300px;
       background: orange;
     }
 
     .right {
-      float: left;
       margin-left: -200px;
       width: 200px;
       background: orange;
@@ -40,10 +41,10 @@
 <body>
   <div class="container">
     <div class="middle">
-      <div class="inner"></div>
+      <div class="inner">inner</div>
     </div>
-    <div class="left"></div>
-    <div class="right"></div>
+    <div class="left">left</div>
+    <div class="right">right</div>
   </div>
 </body>
 
